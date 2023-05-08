@@ -1,49 +1,51 @@
 package model;
 
+import Gson.GsonReader;
+import Gson.GsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class Controller {
 
-    private ArrayList<Product>producto;
+    //Attribute
+    private ArrayList<Product> products;
 
+    //Relations
+    private final GsonReader<ArrayList<Product>> reader;
+    private final GsonWriter<ArrayList<Product>> writer;
 
-    public void addProduct(String nameProduct, String description,int numberOfTimesPurchased,int price, int quanty,int categories){
-        producto = new ArrayList<>();
-
-        producto.add(new Product(nameProduct, description, numberOfTimesPurchased, price, quanty, categories));
-
-
+    //Builder
+    public Controller() {
+        products = new ArrayList<>();
+        reader = new GsonReader<ArrayList<Product>>();
+        writer = new GsonWriter<ArrayList<Product>>();
     }
+
+    public void addProduct(String nameProduct, String description, int numberOfTimesPurchased, int price, int quantity, int categories){
+        products.add(new Product(nameProduct, description, numberOfTimesPurchased, price, quantity, categories));
+    }
+
     public void sort(){
-        Collections.sort(producto);
+        Collections.sort(products);
     }
 
     public void sortByName(){
-        Collections.sort(producto, new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                return o1.getNameProduct().compareTo(o2.getNameProduct());
-            }
-        });
-        ;
+        Collections.sort(products, Comparator.comparing(Product::getNameProduct));
     }
         public void sortByCategory(){
-     Collections.sort(producto, new Comparator<Product>() {
-         @Override
-         public int compare(Product o1, Product o2) {
-             return o1.getCategory().compareTo(o2.getCategory());
-         }
-     });
+     Collections.sort(products, Comparator.comparing(Product::getCategory));
      }
     public void sortByPrice(){
-        Collections.sort(producto, Comparator.comparingInt(Product::getPrice));
+        Collections.sort(products, Comparator.comparingInt(Product::getPrice));
+    }
 
-    }
     public void sortByStock(){
-        Collections.sort(producto,Comparator.comparingInt(Product::getQuanty));
+        Collections.sort(products,Comparator.comparingInt(Product::getQuanty));
     }
+
     private static int binarySearch(ArrayList<Product> products, char start) {
         int min = 0;
         int max = products.size() - 1;
@@ -63,8 +65,14 @@ public class Controller {
                 max = mid - 1;
             }
         }
-
         // No se ha encontrado ningún producto que empiece por la letra inicial
         return -1;
+    }
+
+    public void loadData() throws IOException {
+        products = reader.readDatabase();
+    }
+    public void saveData(){
+        writer.writeInDatabase(products);
     }
 }
