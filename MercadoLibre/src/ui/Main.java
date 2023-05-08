@@ -1,4 +1,4 @@
-package ui.json;
+package ui;
 
 import com.google.gson.Gson;
 import model.Controller;
