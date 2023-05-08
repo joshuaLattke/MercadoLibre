@@ -37,9 +37,12 @@ public class Controller {
          }
      });
      }
-    public void sortByPrice(ArrayList<Product> producto){
+    public void sortByPrice(){
         Collections.sort(producto, Comparator.comparingInt(Product::getPrice));
 
+    }
+    public void sortByStock(){
+        Collections.sort(producto,Comparator.comparingInt(Product::getQuanty));
     }
 
 }

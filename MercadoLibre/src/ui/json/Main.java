@@ -56,15 +56,37 @@ public class Main {
     }
 
     private static void searchProduct() {
+        while (!exit){
         System.out.println("""
                 
                         search product by
                         [1] name
                         [2] price
                         [3] category
-                        [4]
+                        [4] stock
                 """);
-    }
+        String optionTemp = sc.nextLine();
+        int option = Integer.parseInt(optionTemp);
+        switch (option){
+            case 1:
+                control.sortByName();
+                break;
+            case 2:
+                control.sortByPrice();
+                break;
+            case 3:
+                control.sortByCategory();
+                break;
+            case 4:
+                control.sortByStock();
+                break;
+            case 5:
+                mainMenu();
+                exit = true;
+            break;
+
+        }
+    }}
 
     private static void createProduct() {
         System.out.println("Name of the product");
