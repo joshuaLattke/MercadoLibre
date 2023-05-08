@@ -2,9 +2,7 @@ package Model;
 import Model.Order;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class Controller {
 
@@ -50,7 +48,7 @@ public class Controller {
                     p.setQuanty(newQuantity);
                     Order order = new Order(nameClient, c, product, totalPrice);
                     orders.add(order);
-                    
+
                     return true;
                 }
                 break;
@@ -68,6 +66,29 @@ public class Controller {
         }
 
         return false;
+    }
+
+
+    public static void searchByPrice(ArrayList<Product> products, double minPrice, double maxPrice) {
+        ArrayList<Product> results = new ArrayList<Product>();
+        for (Product p : products) {
+            if (p.getPrice() >= minPrice && p.getPrice() <= maxPrice) {
+                results.add(p);
+            }
+        }
+        System.out.println("Results:");
+        sortByNumberOfTimesPurchased(results, false);
+        for (Product p : results) {
+            System.out.println(p.getNameProduct() + " - Price: $" + p.getPrice() + " - Number of times purchased: " + p.getNumberOfTimesPurchased());
+        }
+    }
+
+    public static void sortByNumberOfTimesPurchased(ArrayList<Product> products, boolean ascending) {
+        if (ascending) {
+            Collections.sort(products, Comparator.comparingInt(Product::getNumberOfTimesPurchased));
+        } else {
+            Collections.sort(products, Comparator.comparingInt(Product::getNumberOfTimesPurchased).reversed());
+        }
     }
 
 

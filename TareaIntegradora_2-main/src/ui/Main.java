@@ -54,6 +54,27 @@ public class Main {
     }
 
     public void searchOrder() {
+        while(|exit){
+            System.out.println("\n 1. search Product \n 2 search order \3 exit");
+            switch(option){
+                int option=sc.nextInt();
+                case 1:
+                    searchProduct();
+                    break;
+                case 2:
+                    searcOrder();
+                    break;
+                case 3:
+                    exit=true;
+                default:
+                    System.out.println("you can only enter values 1 to 3");
+            }
+        }
+
+    }
+
+    private void searcOrder() {
+        System.out.println("");
     }
 
     public void buyProduct() {
@@ -130,6 +151,7 @@ public class Main {
 
 
     private void searchProduct() {
+        System.out.println("type some of the product attributes");
     }
 
     public void deleteProduct() {

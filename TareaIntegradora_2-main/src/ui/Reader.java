@@ -4,7 +4,7 @@ import Model.Order;
 import Model.Product;
 import com.google.gson.Gson;
 
-import model.Controller;
+import model.CoController;
 
 import java.io.*;
 import java.util.ArrayList;
