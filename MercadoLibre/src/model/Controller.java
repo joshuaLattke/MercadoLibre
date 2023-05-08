@@ -53,7 +53,7 @@ public class Controller {
             char firstChar = products.get(mid).getNameProduct().charAt(0);
 
             if (firstChar == start) {
-                // El primer producto que empieza por la letra inicial dada
+                // El primer producto que empieza por la letra inicial
                 return mid;
             } else if (firstChar < start) {
                 // La letra inicial dada está más adelante en el alfabeto, busca en la mitad derecha
@@ -64,7 +64,7 @@ public class Controller {
             }
         }
 
-        // No se ha encontrado ningún producto que empiece por la letra inicial dada
+        // No se ha encontrado ningún producto que empiece por la letra inicial
         return -1;
     }
 }
