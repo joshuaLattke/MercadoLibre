@@ -1,4 +1,4 @@
-package json;
+package ui.json;
 
 import com.google.gson.Gson;
 import model.Product;
@@ -11,15 +11,27 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class JsonWriter {
+    private static ArrayList<Product> producto;
 
     public static void main(String[] args) {
         Gson gson = new Gson();
 
-        ArrayList<Product> people = new ArrayList<>();
+        producto = new ArrayList<>();
+        Product product1 = new Product("pepito","",22,1200,1,2);
+        Product product2 = new Product("juan","j",12,500,1,1);
+        Product product3 = new Product("andres","",84,200,1,3);
+        Product product4 = new Product("pablito","",22,400,1,1);
+        Product product5 = new Product("merensejo","",15,70,1,8);
+
+        producto.add(product1);
+        producto.add(product2);
+        producto.add(product3);
+        producto.add(product4);
+        producto.add(product5);
 
 
 
-        String json = gson.toJson(people);
+        String json = gson.toJson(producto);
         System.out.print(json);
 
         try {

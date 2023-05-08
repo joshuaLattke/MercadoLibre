@@ -1,14 +1,26 @@
-package json;
+package ui.json;
 
 import com.google.gson.Gson;
 import model.Product;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import model.Controller;
 
 public class JsonReader {
-
+public static Controller control;
+public static ArrayList<Product>product;
     public static void main(String[] args) {
+         control = new Controller();
+
+       readJson();
+
+
+    }
+
+    public static void readJson(){
         try {
             File file = new File("product.txt");
             System.out.println("Existe: "+file.exists());
@@ -22,22 +34,18 @@ public class JsonReader {
                 json= line;
             }
             fis.close();
-            System.out.println(json);
+    //            System.out.println(ui.json);
 
             Gson gson = new Gson();
             Product[] peopleFromJson = gson.fromJson(json, Product[].class);
 
-            ArrayList<Product> people = new ArrayList<>();
-            for(Product p : peopleFromJson){
-                people.add(p);
-                System.out.println(p.getNameProduct()+" "+p.getCategory());
-            }
+            product = new ArrayList<>();
+            product.addAll(Arrays.asList(peopleFromJson));
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 }
