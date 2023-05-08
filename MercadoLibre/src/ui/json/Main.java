@@ -56,6 +56,14 @@ public class Main {
     }
 
     private static void searchProduct() {
+        System.out.println("""
+                
+                        search product by
+                        [1] name
+                        [2] price
+                        [3] category
+                        [4]
+                """);
     }
 
     private static void createProduct() {
