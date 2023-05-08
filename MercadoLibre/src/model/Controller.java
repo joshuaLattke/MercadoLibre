@@ -44,5 +44,27 @@ public class Controller {
     public void sortByStock(){
         Collections.sort(producto,Comparator.comparingInt(Product::getQuanty));
     }
+    private static int binarySearch(ArrayList<Product> products, char start) {
+        int min = 0;
+        int max = products.size() - 1;
 
+        while (min <= max) {
+            int mid = (min + max) / 2;
+            char firstChar = products.get(mid).getNameProduct().charAt(0);
+
+            if (firstChar == start) {
+                // El primer producto que empieza por la letra inicial dada
+                return mid;
+            } else if (firstChar < start) {
+                // La letra inicial dada está más adelante en el alfabeto, busca en la mitad derecha
+                min = mid + 1;
+            } else {
+                // La letra inicial dada está más atrás en el alfabeto, busca en la mitad izquierda
+                max = mid - 1;
+            }
+        }
+
+        // No se ha encontrado ningún producto que empiece por la letra inicial dada
+        return -1;
+    }
 }
